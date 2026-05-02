@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Centifi — Akıllı harcama takibi</title>
+    <meta
+      name="description"
+      content="Centifi — yapay zekâ destekli harcama takibi. Ses, fiş ve akıllı bütçeler. Paranızı net görün."
+    />
+    <link rel="canonical" href="https://centifi.app/tr/" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#6c63ff" />
+    <link rel="icon" href="../assets/centifi-logo.svg" type="image/svg+xml" />
+    <meta property="og:image" content="https://centifi.app/assets/centifi-logo.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Centifi" />
+    <meta property="og:title" content="Centifi — Akıllı harcama takibi" />
+    <meta
+      property="og:description"
+      content="Yapay zekâ destekli harcama takibi. Ses, fiş ve akıllı bütçeler."
+    />
+    <meta property="og:url" content="https://centifi.app/tr/" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Centifi — Akıllı harcama takibi" />
+    <meta name="twitter:description" content="Ses, fiş ve akıllı bütçelerle harcamalarınızı netleştirin." />
+    <link rel="alternate" hreflang="en" href="https://centifi.app/" />
+    <link rel="alternate" hreflang="tr" href="https://centifi.app/tr/" />
+    <link rel="alternate" hreflang="de" href="https://centifi.app/de/" />
+    <link rel="alternate" hreflang="fr" href="https://centifi.app/fr/" />
+    <link rel="alternate" hreflang="es" href="https://centifi.app/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://centifi.app/" />
+    <script>
+      (function () {
+        try {
+          var k = "centifi-site-theme";
+          var t = localStorage.getItem(k);
+          var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var th = t === "light" || t === "dark" ? t : d ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", th);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Centifi",
+            "url": "https://centifi.app/"
+          },
+          {
+            "@type": "WebSite",
+            "name": "Centifi",
+            "url": "https://centifi.app/tr/",
+            "description": "Ses, fiş ve bütçelerle akıllı harcama takibi.",
+            "inLanguage": "tr"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-lang="tr" data-page="home" data-depth="1">
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="logo" href="index.html">
+          <img
+            src="../assets/centifi-logo.svg"
+            alt=""
+            width="36"
+            height="36"
+            decoding="async"
+            class="logo-img"
+          />
+          <span class="logo-text">Centifi</span>
+        </a>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#how">Nasıl çalışır</a></li>
+            <li><a href="#features">Özellikler</a></li>
+            <li><a class="btn-nav" href="#download">İndir</a></li>
+          </ul>
+          <div class="nav-controls">
+            <span id="centifi-lang-label" class="visually-hidden">Dil</span>
+            <div class="lang-dropdown" id="centifi-lang-dropdown">
+              <button
+                type="button"
+                class="lang-dropdown-trigger"
+                id="centifi-lang-trigger"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="centifi-lang-list"
+                aria-labelledby="centifi-lang-label"
+              >
+                <span class="lang-dropdown-value"
+                  ><span class="lang-flag" aria-hidden="true">🇹🇷</span> Türkçe</span
+                >
+                <svg
+                  class="lang-dropdown-chevron"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 4.5 6 7.5 9 4.5"
+                  />
+                </svg>
+              </button>
+              <ul class="lang-dropdown-list" id="centifi-lang-list" role="listbox" hidden>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="en" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇬🇧</span> English
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    class="lang-dropdown-option is-active"
+                    data-lang="tr"
+                    aria-selected="true"
+                  >
+                    <span class="lang-flag" aria-hidden="true">🇹🇷</span> Türkçe
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="de" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="fr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇫🇷</span> Français
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="es" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇪🇸</span> Español
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="false">
+              🌙
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <h1>Harcamalarınızı net görün. Tablo derdi olmadan.</h1>
+          <p class="hero-lead">
+            Yazın, konuşun veya fişi taratın — Centifi günlük harcamaları düzenli giderler, bütçeler
+            ve listelere dönüştürür. Karmaşıklık değil, netlik isteyenler için.
+          </p>
+          <div class="store-badges" id="download">
+            <a href="#" class="store-badge-link" aria-label="App Store’da indir (yakında)">
+              <img
+                class="store-badge-img store-badge-img--app-light"
+                src="../assets/badges/app-store-black-tr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+              <img
+                class="store-badge-img store-badge-img--app-dark"
+                src="../assets/badges/app-store-white-tr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+            </a>
+            <a href="#" class="store-badge-link" aria-label="Google Play’de indir (yakında)">
+              <img
+                class="store-badge-img store-badge-img--play"
+                src="../assets/badges/google-play-tr.png"
+                alt=""
+                decoding="async"
+              />
+            </a>
+          </div>
+          <div class="hero-mock" aria-hidden="true">
+            <div class="hero-mock-ui">
+              <div class="pill"><span>☕</span> Kahve <span class="amount">₺120</span></div>
+              <div class="pill"><span>🚗</span> Yol <span class="amount">₺450</span></div>
+              <div class="pill"><span>🛒</span> Market <span class="amount">₺1.850</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how">
+        <div class="wrap">
+          <p class="section-title">Nasıl çalışır</p>
+          <h2>Üç saniyede kayıt. Stres yok.</h2>
+          <p class="section-lead">
+            Takip etmek görmezden gelmekten kolaysa, alışkanlık gerçekten oluşur.
+          </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <h3>Hızlıca ekle</h3>
+              <p>
+                Ses, düz metin veya fiş fotoğrafı — “dün öğle 200 lira” deyin, geri kalanını biz
+                düzenleyelim.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <h3>Düzenli kalın</h3>
+              <p>
+                Kategoriler, listeler ve çoklu para birimi; ne olduğunu, sadece tutarı değil,
+                her zaman bilin.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <h3>Sakin bütçe</h3>
+              <p>
+                Kategori başına limitler, eşiğe yaklaşınca cihazınızda yerel bildirimler — kurallar
+                sizin.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="wrap">
+          <p class="section-title">Özellikler</p>
+          <h2>İhtiyacınız olan her şey. Gereksiz hiçbir şey.</h2>
+          <p class="section-lead">
+            En iyi finans uygulamalarından ilham: sürtünmesiz giriş, gerçek bütçeler, araya girmeyen
+            arayüz.
+          </p>
+          <div class="features">
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🎙️</div>
+              <h3>Ses ve doğal giriş</h3>
+              <p>Doğal konuşun veya yazın; yapay zekâ tutar, tarih ve kategoriyi ayrıştırmaya yardım eder.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📸</div>
+              <h3>Fiş ve kamera</h3>
+              <p>Kağıt veya ekran görüntüsünden harcamayı formları doldurmadan kaydedin.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📊</div>
+              <h3>Kategori bütçeleri</h3>
+              <p>Ay başına üst sınır; eşikleri siz belirlersiniz.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📋</div>
+              <h3>Listeler</h3>
+              <p>Seyahat, ev, iş — ayrı listelerle karışıklığı azaltın.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🔔</div>
+              <h3>Cihaz içi uyarılar</h3>
+              <p>Bütçe bildirimleri yerelde; reklam ağı veya zorunlu bulut push yok.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🏦</div>
+              <h3>Banka ipuçları (desteklenen yerlerde)</h3>
+              <p>Bildirim metninden isteğe bağlı otomasyon — gizlilik öncelikli, telefonunuzda.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <div class="cta">
+          <h2>Paranızı anlamaya başlayın</h2>
+          <p>Denemesi ücretsiz. Mağaza bağlantılarını yayınladığınızda buraya ekleyin.</p>
+          <div class="store-badges">
+            <a href="#" class="store-badge-link" aria-label="App Store’da indir (yakında)">
+              <img
+                class="store-badge-img store-badge-img--app-light"
+                src="../assets/badges/app-store-black-tr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+              <img
+                class="store-badge-img store-badge-img--app-dark"
+                src="../assets/badges/app-store-white-tr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+            </a>
+            <a href="#" class="store-badge-link" aria-label="Google Play’de indir (yakında)">
+              <img
+                class="store-badge-img store-badge-img--play"
+                src="../assets/badges/google-play-tr.png"
+                alt=""
+                decoding="async"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand-row">
+              <img
+                src="../assets/centifi-logo.svg"
+                alt=""
+                width="32"
+                height="32"
+                decoding="async"
+                class="footer-logo"
+              />
+              <div class="footer-brand">Centifi</div>
+            </div>
+            <p class="footer-tag">
+              Gerçek hayat için akıllı harcama takibi. Uygulama ve tanıtım sitesi ayrıdır — bu sayfa
+              yalnızca tanıtımdır.
+            </p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Yasal</h4>
+              <ul>
+                <li><a href="privacy.html">Gizlilik politikası</a></li>
+                <li><a href="#">Kullanım şartları</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Ürün</h4>
+              <ul>
+                <li><a href="#features">Özellikler</a></li>
+                <li><a href="#download">İndir</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="copyright">© <span class="copyright-year"></span> Centifi. Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
+    <script src="../assets/site.js" defer></script>
+  </body>
+</html>

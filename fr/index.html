@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Centifi — Suivi intelligent des dépenses</title>
+    <meta
+      name="description"
+      content="Centifi — suivi des dépenses assisté par l’IA. Voix, reçus et budgets intelligents. Votre argent, en clair."
+    />
+    <link rel="canonical" href="https://centifi.app/fr/" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#6c63ff" />
+    <link rel="icon" href="../assets/centifi-logo.svg" type="image/svg+xml" />
+    <meta property="og:image" content="https://centifi.app/assets/centifi-logo.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Centifi" />
+    <meta property="og:title" content="Centifi — Suivi intelligent des dépenses" />
+    <meta
+      property="og:description"
+      content="Suivi des dépenses assisté par l’IA. Voix, reçus et budgets intelligents."
+    />
+    <meta property="og:url" content="https://centifi.app/fr/" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Centifi — Suivi intelligent des dépenses" />
+    <meta name="twitter:description" content="Voix, reçus et budgets — vos dépenses en clair." />
+    <link rel="alternate" hreflang="en" href="https://centifi.app/" />
+    <link rel="alternate" hreflang="tr" href="https://centifi.app/tr/" />
+    <link rel="alternate" hreflang="de" href="https://centifi.app/de/" />
+    <link rel="alternate" hreflang="fr" href="https://centifi.app/fr/" />
+    <link rel="alternate" hreflang="es" href="https://centifi.app/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://centifi.app/" />
+    <script>
+      (function () {
+        try {
+          var k = "centifi-site-theme";
+          var t = localStorage.getItem(k);
+          var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var th = t === "light" || t === "dark" ? t : d ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", th);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Centifi",
+            "url": "https://centifi.app/"
+          },
+          {
+            "@type": "WebSite",
+            "name": "Centifi",
+            "url": "https://centifi.app/fr/",
+            "description": "Suivi des dépenses avec voix, reçus et budgets.",
+            "inLanguage": "fr"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-lang="fr" data-page="home" data-depth="1">
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="logo" href="index.html">
+          <img
+            src="../assets/centifi-logo.svg"
+            alt=""
+            width="36"
+            height="36"
+            decoding="async"
+            class="logo-img"
+          />
+          <span class="logo-text">Centifi</span>
+        </a>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#how">Fonctionnement</a></li>
+            <li><a href="#features">Fonctionnalités</a></li>
+            <li><a class="btn-nav" href="#download">Télécharger</a></li>
+          </ul>
+          <div class="nav-controls">
+            <span id="centifi-lang-label" class="visually-hidden">Langue</span>
+            <div class="lang-dropdown" id="centifi-lang-dropdown">
+              <button
+                type="button"
+                class="lang-dropdown-trigger"
+                id="centifi-lang-trigger"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="centifi-lang-list"
+                aria-labelledby="centifi-lang-label"
+              >
+                <span class="lang-dropdown-value"
+                  ><span class="lang-flag" aria-hidden="true">🇫🇷</span> Français</span
+                >
+                <svg
+                  class="lang-dropdown-chevron"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 4.5 6 7.5 9 4.5"
+                  />
+                </svg>
+              </button>
+              <ul class="lang-dropdown-list" id="centifi-lang-list" role="listbox" hidden>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="en" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇬🇧</span> English
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="tr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇹🇷</span> Türkçe
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="de" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    class="lang-dropdown-option is-active"
+                    data-lang="fr"
+                    aria-selected="true"
+                  >
+                    <span class="lang-flag" aria-hidden="true">🇫🇷</span> Français
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="es" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇪🇸</span> Español
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="false">
+              🌙
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <h1>Voyez vos dépenses clairement. Sans tableur.</h1>
+          <p class="hero-lead">
+            Saisissez, parlez ou scannez un reçu — Centifi transforme le quotidien en dépenses
+            classées, budgets et listes. Pour ceux qui veulent de la clarté, pas de complexité.
+          </p>
+          <div class="store-badges" id="download">
+            <a href="#" class="store-badge-link" aria-label="Télécharger sur l’App Store (bientôt)">
+              <img
+                class="store-badge-img store-badge-img--app-light"
+                src="../assets/badges/app-store-black-fr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+              <img
+                class="store-badge-img store-badge-img--app-dark"
+                src="../assets/badges/app-store-white-fr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+            </a>
+            <a href="#" class="store-badge-link" aria-label="Télécharger sur Google Play (bientôt)">
+              <img
+                class="store-badge-img store-badge-img--play"
+                src="../assets/badges/google-play-fr.png"
+                alt=""
+                decoding="async"
+              />
+            </a>
+          </div>
+          <div class="hero-mock" aria-hidden="true">
+            <div class="hero-mock-ui">
+              <div class="pill"><span>☕</span> Café <span class="amount">4,50 €</span></div>
+              <div class="pill"><span>🚗</span> Course <span class="amount">18,00 €</span></div>
+              <div class="pill"><span>🛒</span> Courses <span class="amount">62,40 €</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how">
+        <div class="wrap">
+          <p class="section-title">Fonctionnement</p>
+          <h2>Quelques secondes pour enregistrer. Zéro culpabilité.</h2>
+          <p class="section-lead">
+            Quand suivre ses dépenses demande moins d’effort que les ignorer, l’habitude prend
+            racine.
+          </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <h3>Capture rapide</h3>
+              <p>
+                Voix, texte ou photo de reçu — dites « déjeuner 12 euros hier », nous rangeons le
+                reste.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <h3>Restez organisé</h3>
+              <p>
+                Catégories, listes et devises multiples — vous savez ce qui s’est passé, pas seulement
+                le montant.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <h3>Budget serein</h3>
+              <p>
+                Plafonds par catégorie, alertes locales en approchant le seuil — sur votre appareil,
+                selon vos règles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="wrap">
+          <p class="section-title">Fonctionnalités</p>
+          <h2>Tout le nécessaire. Rien de superflu.</h2>
+          <p class="section-lead">
+            Inspiré des meilleures apps finance : saisie fluide, vrais budgets, interface discrète.
+          </p>
+          <div class="features">
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🎙️</div>
+              <h3>Voix &amp; saisie naturelle</h3>
+              <p>Parlez ou tapez naturellement ; l’IA aide pour le montant, la date et la catégorie.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📸</div>
+              <h3>Reçus &amp; caméra</h3>
+              <p>Capturez depuis le papier ou une capture d’écran sans formulaires manuels.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📊</div>
+              <h3>Budgets par catégorie</h3>
+              <p>Plafonds mensuels avec des seuils que vous contrôlez.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">📋</div>
+              <h3>Listes</h3>
+              <p>Voyages, maison, travail — gardez tout séparé.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🔔</div>
+              <h3>Alertes sur l’appareil</h3>
+              <p>Notifications locales pour les budgets — pas de réseau publicitaire obligatoire.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon" aria-hidden="true">🏦</div>
+              <h3>Indices bancaires (si pris en charge)</h3>
+              <p>Automatisations optionnelles depuis le texte des notifications — vie privée d’abord.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <div class="cta">
+          <h2>Mieux comprendre votre argent</h2>
+          <p>Essai gratuit. Remplacez les liens des stores quand vos builds sont en ligne.</p>
+          <div class="store-badges">
+            <a href="#" class="store-badge-link" aria-label="Télécharger sur l’App Store (bientôt)">
+              <img
+                class="store-badge-img store-badge-img--app-light"
+                src="../assets/badges/app-store-black-fr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+              <img
+                class="store-badge-img store-badge-img--app-dark"
+                src="../assets/badges/app-store-white-fr.svg"
+                alt=""
+                width="120"
+                height="40"
+                decoding="async"
+              />
+            </a>
+            <a href="#" class="store-badge-link" aria-label="Télécharger sur Google Play (bientôt)">
+              <img
+                class="store-badge-img store-badge-img--play"
+                src="../assets/badges/google-play-fr.png"
+                alt=""
+                decoding="async"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand-row">
+              <img
+                src="../assets/centifi-logo.svg"
+                alt=""
+                width="32"
+                height="32"
+                decoding="async"
+                class="footer-logo"
+              />
+              <div class="footer-brand">Centifi</div>
+            </div>
+            <p class="footer-tag">
+              Suivi intelligent des dépenses pour la vie réelle. L’app et le site marketing sont
+              séparés — cette page est promotionnelle.
+            </p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Légal</h4>
+              <ul>
+                <li><a href="privacy.html">Politique de confidentialité</a></li>
+                <li><a href="#">Conditions d’utilisation</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Produit</h4>
+              <ul>
+                <li><a href="#features">Fonctionnalités</a></li>
+                <li><a href="#download">Télécharger</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="copyright">© <span class="copyright-year"></span> Centifi. Tous droits réservés.</p>
+      </div>
+    </footer>
+    <script src="../assets/site.js" defer></script>
+  </body>
+</html>

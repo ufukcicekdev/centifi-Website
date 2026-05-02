@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datenschutz — Centifi</title>
+    <meta
+      name="description"
+      content="Wie Centifi Daten auf der Marketing-Website und in der App behandelt. Ausgabenverfolgung mit Fokus auf Privatsphäre."
+    />
+    <link rel="canonical" href="https://centifi.app/de/privacy.html" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#6c63ff" />
+    <link rel="icon" href="../assets/centifi-logo.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Datenschutz — Centifi" />
+    <meta property="og:description" content="Informationen zur Datenverarbeitung bei Centifi." />
+    <meta property="og:url" content="https://centifi.app/de/privacy.html" />
+    <meta property="og:locale" content="de_DE" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="alternate" hreflang="en" href="https://centifi.app/privacy.html" />
+    <link rel="alternate" hreflang="tr" href="https://centifi.app/tr/privacy.html" />
+    <link rel="alternate" hreflang="de" href="https://centifi.app/de/privacy.html" />
+    <link rel="alternate" hreflang="fr" href="https://centifi.app/fr/privacy.html" />
+    <link rel="alternate" hreflang="es" href="https://centifi.app/es/privacy.html" />
+    <link rel="alternate" hreflang="x-default" href="https://centifi.app/privacy.html" />
+    <script>
+      (function () {
+        try {
+          var k = "centifi-site-theme";
+          var t = localStorage.getItem(k);
+          var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var th = t === "light" || t === "dark" ? t : d ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", th);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-lang="de" data-page="privacy" data-depth="1">
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="logo" href="index.html">
+          <img
+            src="../assets/centifi-logo.svg"
+            alt=""
+            width="36"
+            height="36"
+            decoding="async"
+            class="logo-img"
+          />
+          <span class="logo-text">Centifi</span>
+        </a>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="index.html#features">Funktionen</a></li>
+            <li><a class="btn-nav" href="index.html#download">Download</a></li>
+          </ul>
+          <div class="nav-controls">
+            <span id="centifi-lang-label" class="visually-hidden">Sprache</span>
+            <div class="lang-dropdown" id="centifi-lang-dropdown">
+              <button
+                type="button"
+                class="lang-dropdown-trigger"
+                id="centifi-lang-trigger"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="centifi-lang-list"
+                aria-labelledby="centifi-lang-label"
+              >
+                <span class="lang-dropdown-value"
+                  ><span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch</span
+                >
+                <svg
+                  class="lang-dropdown-chevron"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 4.5 6 7.5 9 4.5"
+                  />
+                </svg>
+              </button>
+              <ul class="lang-dropdown-list" id="centifi-lang-list" role="listbox" hidden>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="en" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇬🇧</span> English
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="tr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇹🇷</span> Türkçe
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    class="lang-dropdown-option is-active"
+                    data-lang="de"
+                    aria-selected="true"
+                  >
+                    <span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="fr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇫🇷</span> Français
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="es" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇪🇸</span> Español
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="false">
+              🌙
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="legal-page wrap">
+      <a class="legal-back" href="index.html">← Zur Startseite</a>
+      <h1>Datenschutzerklärung</h1>
+      <p class="legal-meta">
+        Stand: 2. Mai 2026 · Diese Seite beschreibt die öffentliche Marketing-Website. Die App kann
+        andere Daten erfassen — siehe Hinweise in der App.
+      </p>
+
+      <h2>Wer wir sind</h2>
+      <p>
+        Centifi bietet Software zur Ausgabenverfolgung. Diese statische Website dient nur der
+        Produktinformation. Zum Lesen ist kein Konto nötig.
+      </p>
+
+      <h2>Was diese Website erfasst</h2>
+      <p>
+        Wie bei den meisten Websites kann Ihr Browser technische Daten an den Hosting-Anbieter
+        senden (z. B. IP, Browsertyp, ungefähre Region) in Server- oder Analyseprotokollen, falls
+        aktiviert. Wir nutzen das zum Betrieb und zur Absicherung der Website.
+      </p>
+
+      <h2>Cookies &amp; Speicher</h2>
+      <p>
+        Diese Website kann Ihre Theme-Wahl (hell/dunkel) im lokalen Speicher des Browsers ablegen,
+        damit sie beim nächsten Besuch erhalten bleibt. Unser Theme-Schalter setzt keine
+        Werbe-Cookies.
+      </p>
+
+      <h2>Dritte</h2>
+      <p>
+        Schriftarten können von Google Fonts geladen werden. Store-Badges können zu Apple oder
+        Google führen, sobald echte Links eingetragen sind. Prüfen Sie die jeweiligen Richtlinien,
+        wenn Sie die Website verlassen.
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Für Datenschutzfragen zu Centifi nutzen Sie die von Ihnen veröffentlichte Kontaktmethode
+        (Support-E-Mail oder In-App-Feedback). Ersetzen Sie diesen Satz durch Ihre echten Daten.
+      </p>
+
+      <h2>Änderungen</h2>
+      <p>Wir können diese Seite anpassen, wenn sich Website oder App ändern. Achten Sie auf das Datum oben.</p>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="copyright">© <span class="copyright-year"></span> Centifi. Alle Rechte vorbehalten.</p>
+      </div>
+    </footer>
+    <script src="../assets/site.js" defer></script>
+  </body>
+</html>

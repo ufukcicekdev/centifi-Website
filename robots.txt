@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update the domain to match production (see sitemap.xml).
+Sitemap: https://centifi.app/sitemap.xml
