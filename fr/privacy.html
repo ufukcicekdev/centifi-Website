@@ -45,19 +45,36 @@
   </head>
   <body data-lang="fr" data-page="privacy" data-depth="1">
     <header class="nav">
-      <div class="wrap nav-inner">
-        <a class="logo" href="index.html">
-          <img
-            src="../assets/centifi-logo.svg"
-            alt=""
-            width="36"
-            height="36"
-            decoding="async"
-            class="logo-img"
-          />
-          <span class="logo-text">Centifi</span>
-        </a>
-        <div class="nav-right">
+      <div class="nav-overlay" id="nav-overlay" hidden></div>
+      <div class="wrap nav-strip">
+        <div class="nav-inner">
+          <a class="logo" href="index.html">
+            <img
+              src="../assets/centifi-logo.svg"
+              alt=""
+              width="36"
+              height="36"
+              decoding="async"
+              class="logo-img"
+            />
+            <span class="logo-text">Centifi</span>
+          </a>
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-drawer"
+          >
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-menu-toggle-bars" aria-hidden="true">
+              <span class="nav-menu-toggle-line"></span>
+              <span class="nav-menu-toggle-line"></span>
+              <span class="nav-menu-toggle-line"></span>
+            </span>
+          </button>
+          <nav class="nav-drawer" id="nav-drawer" aria-label="Navigation">
+            <div class="nav-drawer-shell">
           <ul class="nav-links">
             <li><a href="index.html#features">Fonctionnalités</a></li>
             <li><a class="btn-nav" href="index.html#download">Télécharger</a></li>
@@ -132,6 +149,8 @@
               🌙
             </button>
           </div>
+            </div>
+          </nav>
         </div>
       </div>
     </header>
