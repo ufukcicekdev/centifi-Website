@@ -19,7 +19,8 @@ Locales live at `/` (English), `/tr/`, `/de/`, `/fr/`, `/es/`. Privacy: `privacy
 
 - **Vercel / Netlify**: root directory = `website`, publish the folder root (`index.html` at site root).
 - **GitHub Pages**: put contents in `docs/` or a `gh-pages` branch, or use the whole `website/` folder as the site root.
-- Ensure **pretty URLs** for locale folders: `/tr/` should serve `tr/index.html` (most static hosts do this by default).
+- **Railway**: create a service from this repo and set **Root Directory** to `website`. Nixpacks runs `npm install` from `package.json` / lockfile; `railway.toml` sets `npm start`, which runs [`serve`](https://github.com/vercel/serve) on **`PORT`** (reads `process.env.PORT` automatically). Bind a domain under **Settings → Networking**. Then replace `https://centifi.app` in HTML / `sitemap.xml` / `robots.txt` with your Railway URL or custom domain.
+- Ensure **pretty URLs** for locale folders: `/tr/` should serve `tr/index.html` (most static hosts do this by default; `serve` does).
 
 ## SEO and domain
 

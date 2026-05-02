@@ -1,0 +1,14 @@
+{
+  "name": "centifi-marketing-site",
+  "private": true,
+  "description": "Static marketing site served on Railway via `serve`",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "serve . --no-clipboard"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

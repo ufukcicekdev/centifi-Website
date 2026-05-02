@@ -11,3 +11,6 @@ Thumbs.db
 # Logs & temp
 *.log
 .tmp/
+
+# Node (Railway / local `npm install`)
+node_modules/
