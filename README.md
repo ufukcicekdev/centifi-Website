@@ -17,6 +17,8 @@ Locales live at `/` (English), `/tr/`, `/de/`, `/fr/`, `/es/`. Privacy: `privacy
 
 **Errors:** `404.html` and `500.html` at the site root, plus `/<lang>/404.html` and `/<lang>/500.html`. `body` uses `data-page="error"` so the marketing script does not auto-redirect by browser language away from these pages. **Netlify / Cloudflare Pages** pick up root `404.html` for missing paths. **500** on fully static hosts is only shown if your edge or reverse proxy maps server errors to `/500.html` (e.g. nginx `error_page 500 /500.html;`).
 
+**Why `/styles.css` and `/assets/...` on error pages:** Many hosts serve the same `404.html` body for any unknown URL (e.g. `/tr/dsad`) while the address bar stays on that path. Relative links like `styles.css` would resolve to `/tr/styles.css` and break. Root-absolute paths keep CSS, logo, and `site.js` loading.
+
 ## Deploy
 
 - **Vercel / Netlify**: root directory = `website`, publish the folder root (`index.html` at site root).
