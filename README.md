@@ -46,3 +46,5 @@ Add a real **Open Graph / Twitter image** (`og:image`) when you have an asset.
 
 - **Dark/light**: `assets/site.js` + `localStorage` key `centifi-site-theme`; inline script in `<head>` avoids flash of wrong theme.
 - **Language**: custom dropdown in the nav (flags + labels); each page sets `data-lang`, `data-page`, and `data-depth` on `<body>` for correct relative links (`assets/site.js`).
+- **Auto locale (English entry pages only)**: On `/` or `privacy.html` with `data-lang="en"`, if `localStorage` has no `centifi-lang-choice` yet, the first preferred browser language among `tr`, `de`, `fr`, `es` triggers a redirect to that locale’s same page. Choosing a language in the dropdown saves `centifi-lang-choice` so later visits respect that preference.
+- **Cookies / GA4**: A bottom banner asks for consent; `centifi-cookie-consent` is `accepted` or `rejected`. Google Analytics (`G-0LGX5F8ZK0`) loads only after **Accept**. Decline keeps the site functional without the measurement script.
