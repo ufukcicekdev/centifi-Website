@@ -1,6 +1,6 @@
 /**
  * Centifi marketing site — locale redirect, cookie consent + GA4, theme, language, year.
- * Expects on <body>: data-lang (en|tr|de|fr|es), data-page (home|privacy), data-depth (0|1).
+ * Expects on <body>: data-lang (en|tr|de|fr|es), data-page (home|privacy|error), data-depth (0|1).
  */
 (function () {
   var THEME_KEY = "centifi-site-theme";
@@ -75,7 +75,7 @@
   }
 
   function hrefForLocale(lang, page) {
-    if (page === "home") {
+    if (page === "home" || page === "error") {
       if (lang === "en") return "index.html";
       return lang + "/";
     }
@@ -105,6 +105,12 @@
     var page = body.getAttribute("data-page") || "home";
     var depth = parseInt(body.getAttribute("data-depth") || "0", 10);
     var choice = getLangChoice();
+
+    /* 404/500: never auto-redirect by browser locale — user should see the error page they hit. */
+    if (page === "error") {
+      if (choice === null) setLangChoice(cur);
+      return false;
+    }
 
     if (depth !== 0 || cur !== "en") {
       if (choice === null) {
@@ -225,6 +231,16 @@
     var page = document.body.getAttribute("data-page") || "home";
     var depth = parseInt(document.body.getAttribute("data-depth") || "0", 10);
     var cur = document.body.getAttribute("data-lang") || "en";
+
+    if (page === "error") {
+      if (depth === 0) {
+        if (lang === "en") return "index.html";
+        return lang + "/";
+      }
+      if (lang === "en") return "../index.html";
+      if (lang === cur) return "index.html";
+      return "../" + lang + "/";
+    }
 
     if (page === "home") {
       if (depth === 0) {

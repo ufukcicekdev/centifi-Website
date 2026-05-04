@@ -15,6 +15,8 @@ Open `http://localhost:3000` (serve) or `http://localhost:8080`.
 
 Locales live at `/` (English), `/tr/`, `/de/`, `/fr/`, `/es/`. Privacy: `privacy.html` and `/<lang>/privacy.html`.
 
+**Errors:** `404.html` and `500.html` at the site root, plus `/<lang>/404.html` and `/<lang>/500.html`. `body` uses `data-page="error"` so the marketing script does not auto-redirect by browser language away from these pages. **Netlify / Cloudflare Pages** pick up root `404.html` for missing paths. **500** on fully static hosts is only shown if your edge or reverse proxy maps server errors to `/500.html` (e.g. nginx `error_page 500 /500.html;`).
+
 ## Deploy
 
 - **Vercel / Netlify**: root directory = `website`, publish the folder root (`index.html` at site root).
