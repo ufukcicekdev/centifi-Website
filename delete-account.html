@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account deletion — Centifi</title>
+    <meta
+      name="description"
+      content="How to request account and data deletion for Centifi."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://centifi.app/delete-account.html" />
+    <meta name="theme-color" content="#6c63ff" />
+    <link rel="icon" type="image/png" sizes="48x48" href="https://centifi.app/assets/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://centifi.app/assets/favicon-96.png" />
+    <link rel="icon" href="https://centifi.app/assets/centifi-logo.svg" type="image/svg+xml" />
+    <script>
+      (function () {
+        try {
+          var k = "centifi-site-theme";
+          var t = localStorage.getItem(k);
+          var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var th = t === "light" || t === "dark" ? t : d ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", th);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-lang="en" data-page="privacy" data-depth="0">
+    <header class="nav">
+      <div class="nav-overlay" id="nav-overlay" hidden></div>
+      <div class="wrap nav-strip">
+        <div class="nav-inner">
+          <a class="logo" href="/index.html">
+            <img
+              src="/assets/centifi-logo.svg"
+              alt=""
+              width="36"
+              height="36"
+              decoding="async"
+              class="logo-img"
+            />
+            <span class="logo-text">Centifi</span>
+          </a>
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-drawer"
+          >
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-menu-toggle-bars" aria-hidden="true">
+              <span class="nav-menu-toggle-line"></span>
+              <span class="nav-menu-toggle-line"></span>
+              <span class="nav-menu-toggle-line"></span>
+            </span>
+          </button>
+          <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
+            <div class="nav-drawer-shell">
+              <ul class="nav-links">
+                <li><a href="/index.html#features">Features</a></li>
+                <li><a class="btn-nav" href="/index.html#download">Download</a></li>
+              </ul>
+              <div class="nav-controls">
+                <span id="centifi-lang-label" class="visually-hidden">Language</span>
+                <div class="lang-dropdown" id="centifi-lang-dropdown">
+                  <button
+                    type="button"
+                    class="lang-dropdown-trigger"
+                    id="centifi-lang-trigger"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-controls="centifi-lang-list"
+                    aria-labelledby="centifi-lang-label"
+                  >
+                    <span class="lang-flag" aria-hidden="true">🇬🇧</span>
+                    <span class="lang-label">EN</span>
+                    <span class="lang-caret" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="lang-dropdown-list" id="centifi-lang-list" role="listbox" tabindex="-1" hidden>
+                    <button class="lang-dropdown-option is-active" type="button" data-lang="en" role="option">🇬🇧 English</button>
+                    <button class="lang-dropdown-option" type="button" data-lang="tr" role="option">🇹🇷 Türkçe</button>
+                    <button class="lang-dropdown-option" type="button" data-lang="de" role="option">🇩🇪 Deutsch</button>
+                    <button class="lang-dropdown-option" type="button" data-lang="fr" role="option">🇫🇷 Français</button>
+                    <button class="lang-dropdown-option" type="button" data-lang="es" role="option">🇪🇸 Español</button>
+                  </div>
+                </div>
+                <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="true" aria-label="Switch to light mode">
+                  ☀️
+                </button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap legal-page">
+      <h1>Account deletion</h1>
+      <p class="legal-meta">Last updated: May 2026</p>
+
+      <h2>How to request deletion</h2>
+      <p>
+        Email <a href="mailto:info@centifi.app?subject=Account%20deletion%20request%20(Centifi)">info@centifi.app</a>
+        from the email address associated with your Centifi account.
+      </p>
+      <p>In your email, include:</p>
+      <ul>
+        <li>The account email address you use in Centifi</li>
+        <li>Your request: “Delete my account”</li>
+      </ul>
+
+      <h2>What gets deleted</h2>
+      <ul>
+        <li>Your Centifi account profile</li>
+        <li>Your synced expenses, lists, categories, and preferences stored on our servers</li>
+      </ul>
+
+      <h2>Retention</h2>
+      <p>
+        We aim to process deletion requests within a reasonable time. If we must retain certain records for legal or
+        security reasons, we will limit retention to what is required.
+      </p>
+
+      <p style="margin-top: 28px">
+        <a class="btn-nav" href="/privacy.html">Privacy policy</a>
+      </p>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="copyright">© <span class="copyright-year"></span> Centifi. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>
+
