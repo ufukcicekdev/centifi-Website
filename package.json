@@ -6,7 +6,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "serve . --no-clipboard"
+    "start": "serve . --no-clipboard",
+    "generate:icons": "node scripts/generate-icons.mjs --input assets/centifi-logo.svg --outDir assets/generated --bg #6C63FF --radius 110 --sizes 48,96,180,512,1024 --writeToProjectRoot"
   },
   "dependencies": {
     "serve": "^14.2.4"
