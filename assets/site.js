@@ -79,6 +79,10 @@
       if (lang === "en") return "index.html";
       return lang + "/";
     }
+    if (page === "terms") {
+      if (lang === "en") return "terms.html";
+      return lang + "/terms.html";
+    }
     if (lang === "en") return "privacy.html";
     return lang + "/privacy.html";
   }
@@ -252,13 +256,15 @@
       return "../" + lang + "/";
     }
 
+    var legalPage = page === "terms" ? "terms.html" : "privacy.html";
+
     if (depth === 0) {
-      if (lang === "en") return "privacy.html";
-      return lang + "/privacy.html";
+      if (lang === "en") return legalPage;
+      return lang + "/" + legalPage;
     }
-    if (lang === "en") return "../privacy.html";
-    if (lang === cur) return "privacy.html";
-    return "../" + lang + "/privacy.html";
+    if (lang === "en") return "../" + legalPage;
+    if (lang === cur) return legalPage;
+    return "../" + lang + "/" + legalPage;
   }
 
   function initThemeToggle() {
