@@ -57,18 +57,45 @@
               <div class="nav-controls">
                 <span id="centifi-lang-label" class="visually-hidden">Language</span>
                 <div class="lang-dropdown" id="centifi-lang-dropdown">
-                  <button type="button" class="lang-dropdown-trigger" id="centifi-lang-trigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="centifi-lang-list" aria-labelledby="centifi-lang-label">
-                    <span class="lang-flag" aria-hidden="true">🇩🇪</span>
-                    <span class="lang-label">DE</span>
-                    <span class="lang-caret" aria-hidden="true">▾</span>
+                  <button
+                    type="button"
+                    class="lang-dropdown-trigger"
+                    id="centifi-lang-trigger"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-controls="centifi-lang-list"
+                    aria-labelledby="centifi-lang-label"
+                  >
+                    <span class="lang-dropdown-value"><span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch</span>
+                    <svg class="lang-dropdown-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 4.5 6 7.5 9 4.5"/></svg>
                   </button>
-                  <div class="lang-dropdown-list" id="centifi-lang-list" role="listbox" tabindex="-1" hidden>
-                    <button class="lang-dropdown-option" type="button" data-lang="en" role="option">🇬🇧 English</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="tr" role="option">🇹🇷 Türkçe</button>
-                    <button class="lang-dropdown-option is-active" type="button" data-lang="de" role="option">🇩🇪 Deutsch</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="fr" role="option">🇫🇷 Français</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="es" role="option">🇪🇸 Español</button>
-                  </div>
+                  <ul class="lang-dropdown-list" id="centifi-lang-list" role="listbox" hidden>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="en" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇬🇧</span> English
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="tr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇹🇷</span> Türkçe
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option is-active" data-lang="de" aria-selected="true">
+                    <span class="lang-flag" aria-hidden="true">🇩🇪</span> Deutsch
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="fr" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇫🇷</span> Français
+                  </button>
+                </li>
+                <li role="presentation">
+                  <button type="button" role="option" class="lang-dropdown-option" data-lang="es" aria-selected="false">
+                    <span class="lang-flag" aria-hidden="true">🇪🇸</span> Español
+                  </button>
+                </li>
+                  </ul>
                 </div>
                 <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="true" aria-label="Switch to light mode">☀️</button>
               </div>
@@ -78,7 +105,7 @@
       </div>
     </header>
 
-    <main class="wrap feedback-page">
+    <main class="wrap feedback-page page-main">
       <h1>Feedback senden</h1>
       <p class="feedback-lead">Teilen Sie Ideen, Fehler oder Fragen zu Centifi — wir lesen jede Nachricht.</p>
 

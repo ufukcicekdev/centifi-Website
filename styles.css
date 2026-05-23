@@ -45,6 +45,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 a {
@@ -185,10 +186,11 @@ html[data-theme="light"] .nav-overlay {
 
   .nav-drawer {
     position: absolute;
-    left: 50%;
+    left: 0;
+    right: 0;
     top: 100%;
-    width: min(100vw - 48px, 1120px);
-    transform: translateX(-50%) translateY(-8px);
+    width: auto;
+    transform: translateY(-8px);
     margin-top: 0;
     /* Solid panel — avoids “see-through” menu over hero copy */
     background: var(--surface);
@@ -210,7 +212,7 @@ html[data-theme="light"] .nav-overlay {
   .nav-drawer.nav-drawer--open {
     visibility: visible;
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
     pointer-events: auto;
   }
 
@@ -272,10 +274,23 @@ html[data-theme="light"] .nav-overlay {
     max-width: 100%;
   }
 
-  /* Dropdown panel clears drawer width */
-  .lang-dropdown-list {
-    width: calc(100vw - 48px);
-    max-width: 280px;
+  /* Dropdown panel fits drawer */
+  .nav-controls .lang-dropdown {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .nav-controls .lang-dropdown-trigger {
+    width: 100%;
+    max-width: none;
+  }
+
+  .nav-controls .lang-dropdown-list {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
   }
 }
 
@@ -413,6 +428,12 @@ html[data-theme="light"] .nav-overlay {
   border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.lang-dropdown-list li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 html[data-theme="light"] .lang-dropdown-list {
@@ -1213,6 +1234,110 @@ html[data-theme="dark"] .feedback-status.is-error {
 
 .feedback-alt a {
   font-weight: 600;
+}
+
+.page-main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.feedback-field .form-dropdown .lang-dropdown-trigger:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px var(--purple-dim);
+}
+
+/* ── Mobile: forms, legal, subpages ────────────────────────────────────────── */
+@media (max-width: 767px) {
+  html {
+    overflow-x: clip;
+  }
+
+  .page-main.feedback-page,
+  .wrap.legal-page {
+    padding-top: 28px;
+    padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .feedback-page h1,
+  .legal-page h1 {
+    font-size: clamp(1.5rem, 6.5vw, 1.85rem);
+    line-height: 1.2;
+  }
+
+  .feedback-lead {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .feedback-field input,
+  .feedback-field textarea,
+  .form-dropdown .lang-dropdown-trigger {
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .feedback-field textarea {
+    min-height: 120px;
+  }
+
+  .form-dropdown .lang-dropdown-value {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .form-dropdown .lang-dropdown-value > span:last-child,
+  .form-dropdown .dropdown-option-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .form-dropdown .lang-dropdown-list {
+    max-height: min(260px, 45vh);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .feedback-actions {
+    width: 100%;
+  }
+
+  .feedback-actions .cookie-btn {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .feedback-alt {
+    word-break: break-word;
+  }
+
+  .legal-page p,
+  .legal-page ul,
+  .legal-page li {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .legal-page ul {
+    padding-left: 1.15rem;
+  }
+
+  .legal-page .btn-nav {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
 }
 
 /* ── Error pages (404 / 500) ───────────────────────────────────────────────── */

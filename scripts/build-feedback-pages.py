@@ -5,6 +5,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from page_nav import render_nav
+
 ROOT = Path(__file__).resolve().parents[1]
 
 CHEVRON_SVG = """<svg class="lang-dropdown-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 4.5 6 7.5 9 4.5"/></svg>"""
@@ -109,24 +111,16 @@ LOCALES = {
     },
 }
 
-LANG_OPTIONS = """
-                    <button class="lang-dropdown-option is-active" type="button" data-lang="en" role="option">🇬🇧 English</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="tr" role="option">🇹🇷 Türkçe</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="de" role="option">🇩🇪 Deutsch</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="fr" role="option">🇫🇷 Français</button>
-                    <button class="lang-dropdown-option" type="button" data-lang="es" role="option">🇪🇸 Español</button>
-"""
-
-
 def render(lang: str, cfg: dict) -> str:
     depth = 0 if lang == "en" else 1
-    active = {code: ' class="lang-dropdown-option is-active"' if code == lang else ' class="lang-dropdown-option"' for code in LOCALES}
-    options = "\n".join(
-        f'                    <button{active[code]} type="button" data-lang="{code}" role="option">'
-        f'{"🇬🇧 English" if code == "en" else "🇹🇷 Türkçe" if code == "tr" else "🇩🇪 Deutsch" if code == "de" else "🇫🇷 Français" if code == "fr" else "🇪🇸 Español"}</button>'
-        for code in LOCALES
+    nav = render_nav(
+        lang=lang,
+        home_href=cfg["home_href"],
+        features_href=cfg["features_href"],
+        download_href=cfg["download_href"],
+        nav_features=cfg["nav_features"],
+        nav_download=cfg["nav_download"],
     )
-    flag_label = {"en": ("🇬🇧", "EN"), "tr": ("🇹🇷", "TR"), "de": ("🇩🇪", "DE"), "fr": ("🇫🇷", "FR"), "es": ("🇪🇸", "ES")}[lang]
 
     return f"""<!DOCTYPE html>
 <html lang="{cfg["html_lang"]}">
@@ -162,49 +156,9 @@ def render(lang: str, cfg: dict) -> str:
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body data-lang="{lang}" data-page="feedback" data-depth="{depth}">
-    <header class="nav">
-      <div class="nav-overlay" id="nav-overlay" hidden></div>
-      <div class="wrap nav-strip">
-        <div class="nav-inner">
-          <a class="logo" href="{cfg["home_href"]}">
-            <img src="/assets/centifi-logo.svg" alt="" width="36" height="36" decoding="async" class="logo-img" />
-            <span class="logo-text">Centifi</span>
-          </a>
-          <button type="button" class="nav-menu-toggle" id="nav-menu-toggle" aria-expanded="false" aria-controls="nav-drawer">
-            <span class="visually-hidden">Menu</span>
-            <span class="nav-menu-toggle-bars" aria-hidden="true">
-              <span class="nav-menu-toggle-line"></span>
-              <span class="nav-menu-toggle-line"></span>
-              <span class="nav-menu-toggle-line"></span>
-            </span>
-          </button>
-          <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
-            <div class="nav-drawer-shell">
-              <ul class="nav-links">
-                <li><a href="{cfg["features_href"]}">{cfg["nav_features"]}</a></li>
-                <li><a class="btn-nav" href="{cfg["download_href"]}">{cfg["nav_download"]}</a></li>
-              </ul>
-              <div class="nav-controls">
-                <span id="centifi-lang-label" class="visually-hidden">Language</span>
-                <div class="lang-dropdown" id="centifi-lang-dropdown">
-                  <button type="button" class="lang-dropdown-trigger" id="centifi-lang-trigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="centifi-lang-list" aria-labelledby="centifi-lang-label">
-                    <span class="lang-flag" aria-hidden="true">{flag_label[0]}</span>
-                    <span class="lang-label">{flag_label[1]}</span>
-                    <span class="lang-caret" aria-hidden="true">▾</span>
-                  </button>
-                  <div class="lang-dropdown-list" id="centifi-lang-list" role="listbox" tabindex="-1" hidden>
-{options}
-                  </div>
-                </div>
-                <button type="button" class="theme-toggle" id="centifi-theme" aria-pressed="true" aria-label="Switch to light mode">☀️</button>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </header>
+{nav}
 
-    <main class="wrap feedback-page">
+    <main class="wrap feedback-page page-main">
       <h1>{cfg["h1"]}</h1>
       <p class="feedback-lead">{cfg["lead"]}</p>
 
