@@ -1,6 +1,6 @@
 /**
  * Centifi marketing site — locale redirect, cookie consent + GA4, theme, language, year.
- * Expects on <body>: data-lang (en|tr|de|fr|es), data-page (home|privacy|error), data-depth (0|1).
+ * Expects on <body>: data-lang (en|tr|de|fr|es), data-page (home|privacy|terms|feedback|test-users|error), data-depth (0|1).
  */
 (function () {
   var THEME_KEY = "centifi-site-theme";
@@ -82,6 +82,14 @@
     if (page === "terms") {
       if (lang === "en") return "terms.html";
       return lang + "/terms.html";
+    }
+    if (page === "feedback") {
+      if (lang === "en") return "feedback.html";
+      return lang + "/feedback.html";
+    }
+    if (page === "test-users") {
+      if (lang === "en") return "test-users.html";
+      return lang + "/test-users.html";
     }
     if (lang === "en") return "privacy.html";
     return lang + "/privacy.html";
@@ -256,7 +264,10 @@
       return "../" + lang + "/";
     }
 
-    var legalPage = page === "terms" ? "terms.html" : "privacy.html";
+    var legalPage = "privacy.html";
+    if (page === "terms") legalPage = "terms.html";
+    if (page === "feedback") legalPage = "feedback.html";
+    if (page === "test-users") legalPage = "test-users.html";
 
     if (depth === 0) {
       if (lang === "en") return legalPage;
@@ -465,6 +476,412 @@
     });
   }
 
+  var FEEDBACK_COPY = {
+    en: {
+      name: "Name",
+      email: "Email",
+      topic: "Topic",
+      message: "Message",
+      required: "*",
+      hint: "At least 10 characters.",
+      submit: "Send feedback",
+      sending: "Sending…",
+      success: "Thank you! Your message was sent.",
+      errorGeneric: "Something went wrong. Please try again or email us.",
+      errorNetwork: "Could not reach the server. Check your connection or email info@centifi.app.",
+      errorValidation: "Please check the highlighted fields.",
+      alt: "Prefer email?",
+      categories: {
+        general: "General",
+        bug: "Bug report",
+        feature: "Feature request",
+        billing: "Billing / subscription",
+        other: "Other",
+      },
+    },
+    tr: {
+      name: "Ad",
+      email: "E-posta",
+      topic: "Konu",
+      message: "Mesaj",
+      required: "*",
+      hint: "En az 10 karakter.",
+      submit: "Gönder",
+      sending: "Gönderiliyor…",
+      success: "Teşekkürler! Mesajınız iletildi.",
+      errorGeneric: "Bir sorun oluştu. Lütfen tekrar deneyin veya bize yazın.",
+      errorNetwork: "Sunucuya ulaşılamadı. Bağlantınızı kontrol edin veya info@centifi.app adresine yazın.",
+      errorValidation: "Lütfen işaretli alanları kontrol edin.",
+      alt: "E-posta tercih eder misiniz?",
+      categories: {
+        general: "Genel",
+        bug: "Hata bildirimi",
+        feature: "Özellik isteği",
+        billing: "Abonelik / ödeme",
+        other: "Diğer",
+      },
+    },
+    de: {
+      name: "Name",
+      email: "E-Mail",
+      topic: "Thema",
+      message: "Nachricht",
+      required: "*",
+      hint: "Mindestens 10 Zeichen.",
+      submit: "Absenden",
+      sending: "Wird gesendet…",
+      success: "Danke! Ihre Nachricht wurde gesendet.",
+      errorGeneric: "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns schreiben.",
+      errorNetwork: "Server nicht erreichbar. Verbindung prüfen oder info@centifi.app schreiben.",
+      errorValidation: "Bitte markierte Felder prüfen.",
+      alt: "Lieber per E-Mail?",
+      categories: {
+        general: "Allgemein",
+        bug: "Fehlermeldung",
+        feature: "Feature-Wunsch",
+        billing: "Abo / Abrechnung",
+        other: "Sonstiges",
+      },
+    },
+    fr: {
+      name: "Nom",
+      email: "E-mail",
+      topic: "Sujet",
+      message: "Message",
+      required: "*",
+      hint: "Au moins 10 caractères.",
+      submit: "Envoyer",
+      sending: "Envoi…",
+      success: "Merci ! Votre message a été envoyé.",
+      errorGeneric: "Un problème est survenu. Réessayez ou écrivez-nous.",
+      errorNetwork: "Impossible de joindre le serveur. Vérifiez la connexion ou écrivez à info@centifi.app.",
+      errorValidation: "Veuillez vérifier les champs indiqués.",
+      alt: "Vous préférez l’e-mail ?",
+      categories: {
+        general: "Général",
+        bug: "Signaler un bug",
+        feature: "Demande de fonctionnalité",
+        billing: "Abonnement / facturation",
+        other: "Autre",
+      },
+    },
+    es: {
+      name: "Nombre",
+      email: "Correo",
+      topic: "Tema",
+      message: "Mensaje",
+      required: "*",
+      hint: "Al menos 10 caracteres.",
+      submit: "Enviar",
+      sending: "Enviando…",
+      success: "¡Gracias! Tu mensaje se envió correctamente.",
+      errorGeneric: "Algo salió mal. Inténtalo de nuevo o escríbenos.",
+      errorNetwork: "No se pudo conectar al servidor. Revisa la conexión o escribe a info@centifi.app.",
+      errorValidation: "Revisa los campos marcados.",
+      alt: "¿Prefieres correo?",
+      categories: {
+        general: "General",
+        bug: "Informar error",
+        feature: "Solicitud de función",
+        billing: "Suscripción / facturación",
+        other: "Otro",
+      },
+    },
+  };
+
+  function feedbackStrings() {
+    var L = getLang();
+    return FEEDBACK_COPY[L] || FEEDBACK_COPY.en;
+  }
+
+  function feedbackApiBase() {
+    var meta = document.querySelector('meta[name="centifi-api-base"]');
+    if (meta && meta.content) return meta.content.replace(/\/$/, "");
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      return "http://127.0.0.1:8000";
+    }
+    return "https://centifi-backend-production.up.railway.app";
+  }
+
+  function setFeedbackStatus(el, message, kind) {
+    if (!el) return;
+    el.hidden = !message;
+    el.textContent = message || "";
+    el.classList.remove("is-success", "is-error");
+    if (kind) el.classList.add(kind === "success" ? "is-success" : "is-error");
+  }
+
+  function initFeedbackForm() {
+    var form = document.getElementById("centifi-feedback-form");
+    if (!form) return;
+
+    var copy = feedbackStrings();
+    var statusEl = document.getElementById("feedback-status");
+    var submitBtn = document.getElementById("feedback-submit");
+
+    var nameLabel = document.getElementById("feedback-name-label");
+    var emailLabel = document.getElementById("feedback-email-label");
+    var categoryLabel = document.getElementById("feedback-category-label");
+    var messageLabel = document.getElementById("feedback-message-label");
+    var hintEl = document.getElementById("feedback-message-hint");
+    var altText = document.getElementById("feedback-alt-text");
+    var categorySelect = document.getElementById("feedback-category");
+
+    if (nameLabel) nameLabel.textContent = copy.name;
+    if (emailLabel)
+      emailLabel.innerHTML = copy.email + ' <span class="feedback-required">' + copy.required + "</span>";
+    if (categoryLabel) categoryLabel.textContent = copy.topic;
+    if (messageLabel)
+      messageLabel.innerHTML = copy.message + ' <span class="feedback-required">' + copy.required + "</span>";
+    if (hintEl) hintEl.textContent = copy.hint;
+    if (altText) altText.textContent = copy.alt;
+    if (submitBtn) submitBtn.textContent = copy.submit;
+
+    if (categorySelect && copy.categories) {
+      Array.prototype.forEach.call(categorySelect.options, function (opt) {
+        if (copy.categories[opt.value]) opt.textContent = copy.categories[opt.value];
+      });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setFeedbackStatus(statusEl, "", "");
+
+      var email = (document.getElementById("feedback-email").value || "").trim();
+      var message = (document.getElementById("feedback-message").value || "").trim();
+      if (!email || message.length < 10) {
+        setFeedbackStatus(statusEl, copy.errorValidation, "error");
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = copy.sending;
+      }
+
+      var payload = {
+        name: (document.getElementById("feedback-name").value || "").trim(),
+        email: email,
+        category: categorySelect ? categorySelect.value : "general",
+        message: message,
+        language: getLang(),
+        website: (document.getElementById("feedback-website").value || "").trim(),
+      };
+
+      fetch(feedbackApiBase() + "/api/feedback/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          return res.json().catch(function () {
+            return {};
+          }).then(function (data) {
+            if (res.ok) {
+              form.reset();
+              setFeedbackStatus(statusEl, copy.success, "success");
+              return;
+            }
+            var detail = data.detail || data.message;
+            if (typeof detail === "object") detail = Object.values(detail).join(" ");
+            setFeedbackStatus(statusEl, detail || copy.errorGeneric, "error");
+          });
+        })
+        .catch(function () {
+          setFeedbackStatus(statusEl, copy.errorNetwork, "error");
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = copy.submit;
+          }
+        });
+    });
+  }
+
+  var TEST_USERS_COPY = {
+    en: {
+      platform: "Platform",
+      email: "Email",
+      required: "*",
+      platformPlaceholder: "Select…",
+      platforms: { ios: "iOS", android: "Android" },
+      submit: "Apply",
+      sending: "Sending…",
+      success: "Thank you! We received your application.",
+      duplicate: "This email is already registered for testing. We’ll contact you if a spot opens.",
+      errorGeneric: "Something went wrong. Please try again.",
+      errorNetwork: "Could not reach the server. Check your connection and try again.",
+      errorValidation: "Please select a platform and enter a valid email.",
+      alt: "Questions?",
+      altLink: "Send feedback",
+    },
+    tr: {
+      platform: "Platform",
+      email: "E-posta",
+      required: "*",
+      platformPlaceholder: "Seçin…",
+      platforms: { ios: "iOS", android: "Android" },
+      submit: "Başvur",
+      sending: "Gönderiliyor…",
+      success: "Teşekkürler! Başvurunuz alındı.",
+      duplicate: "Bu e-posta zaten test listesinde kayıtlı. Yer açılırsa sizinle iletişime geçeriz.",
+      errorGeneric: "Bir sorun oluştu. Lütfen tekrar deneyin.",
+      errorNetwork: "Sunucuya ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+      errorValidation: "Lütfen platform seçin ve geçerli bir e-posta girin.",
+      alt: "Sorularınız mı var?",
+      altLink: "Geri bildirim gönder",
+    },
+    de: {
+      platform: "Plattform",
+      email: "E-Mail",
+      required: "*",
+      platformPlaceholder: "Auswählen…",
+      platforms: { ios: "iOS", android: "Android" },
+      submit: "Bewerben",
+      sending: "Wird gesendet…",
+      success: "Danke! Ihre Bewerbung ist eingegangen.",
+      duplicate: "Diese E-Mail ist bereits für Tests registriert. Wir melden uns bei Ihnen.",
+      errorGeneric: "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+      errorNetwork: "Server nicht erreichbar. Verbindung prüfen und erneut versuchen.",
+      errorValidation: "Bitte Plattform wählen und gültige E-Mail eingeben.",
+      alt: "Fragen?",
+      altLink: "Feedback senden",
+    },
+    fr: {
+      platform: "Plateforme",
+      email: "E-mail",
+      required: "*",
+      platformPlaceholder: "Choisir…",
+      platforms: { ios: "iOS", android: "Android" },
+      submit: "Candidater",
+      sending: "Envoi…",
+      success: "Merci ! Votre candidature a bien été reçue.",
+      duplicate: "Cet e-mail est déjà inscrit aux tests. Nous vous contacterons si une place se libère.",
+      errorGeneric: "Un problème est survenu. Veuillez réessayer.",
+      errorNetwork: "Impossible de joindre le serveur. Vérifiez la connexion et réessayez.",
+      errorValidation: "Choisissez une plateforme et saisissez un e-mail valide.",
+      alt: "Des questions ?",
+      altLink: "Envoyer un commentaire",
+    },
+    es: {
+      platform: "Plataforma",
+      email: "Correo",
+      required: "*",
+      platformPlaceholder: "Elegir…",
+      platforms: { ios: "iOS", android: "Android" },
+      submit: "Solicitar",
+      sending: "Enviando…",
+      success: "¡Gracias! Recibimos tu solicitud.",
+      duplicate: "Este correo ya está registrado para pruebas. Te contactaremos si hay plaza.",
+      errorGeneric: "Algo salió mal. Inténtalo de nuevo.",
+      errorNetwork: "No se pudo conectar al servidor. Revisa la conexión e inténtalo de nuevo.",
+      errorValidation: "Elige una plataforma e introduce un correo válido.",
+      alt: "¿Preguntas?",
+      altLink: "Enviar comentarios",
+    },
+  };
+
+  function testUsersStrings() {
+    var L = getLang();
+    return TEST_USERS_COPY[L] || TEST_USERS_COPY.en;
+  }
+
+  function feedbackHref() {
+    var depth = parseInt(document.body.getAttribute("data-depth") || "0", 10);
+    if (depth === 0) return "feedback.html";
+    return "feedback.html";
+  }
+
+  function initTestUsersForm() {
+    var form = document.getElementById("centifi-test-users-form");
+    if (!form) return;
+
+    var copy = testUsersStrings();
+    var statusEl = document.getElementById("test-users-status");
+    var submitBtn = document.getElementById("test-users-submit");
+    var platformSelect = document.getElementById("test-users-platform");
+    var platformLabel = document.getElementById("test-users-platform-label");
+    var emailLabel = document.getElementById("test-users-email-label");
+    var altText = document.getElementById("test-users-alt-text");
+    var altLink = document.getElementById("test-users-alt-link");
+
+    if (platformLabel)
+      platformLabel.innerHTML =
+        copy.platform + ' <span class="feedback-required">' + copy.required + "</span>";
+    if (emailLabel)
+      emailLabel.innerHTML = copy.email + ' <span class="feedback-required">' + copy.required + "</span>";
+    if (altText) altText.textContent = copy.alt;
+    if (altLink) {
+      altLink.textContent = copy.altLink;
+      altLink.setAttribute("href", feedbackHref());
+    }
+    if (submitBtn) submitBtn.textContent = copy.submit;
+
+    if (platformSelect) {
+      var placeholder = platformSelect.querySelector('option[value=""]');
+      if (placeholder) placeholder.textContent = copy.platformPlaceholder;
+      Array.prototype.forEach.call(platformSelect.options, function (opt) {
+        if (copy.platforms[opt.value]) opt.textContent = copy.platforms[opt.value];
+      });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setFeedbackStatus(statusEl, "", "");
+
+      var email = (document.getElementById("test-users-email").value || "").trim();
+      var platform = platformSelect ? platformSelect.value : "";
+      if (!email || !platform) {
+        setFeedbackStatus(statusEl, copy.errorValidation, "error");
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = copy.sending;
+      }
+
+      fetch(feedbackApiBase() + "/api/test-users/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email: email,
+          platform: platform,
+          language: getLang(),
+          website: (document.getElementById("test-users-website").value || "").trim(),
+        }),
+      })
+        .then(function (res) {
+          return res.json().catch(function () {
+            return {};
+          }).then(function (data) {
+            if (res.status === 409 || data.code === "duplicate_email") {
+              setFeedbackStatus(statusEl, copy.duplicate, "error");
+              return;
+            }
+            if (res.ok) {
+              form.reset();
+              setFeedbackStatus(statusEl, copy.success, "success");
+              return;
+            }
+            var detail = data.detail || data.message;
+            if (typeof detail === "object") detail = Object.values(detail).join(" ");
+            setFeedbackStatus(statusEl, detail || copy.errorGeneric, "error");
+          });
+        })
+        .catch(function () {
+          setFeedbackStatus(statusEl, copy.errorNetwork, "error");
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = copy.submit;
+          }
+        });
+    });
+  }
+
   if (initLocaleRedirect()) return;
 
   initCookieBanner();
@@ -472,4 +889,6 @@
   initMobileNav();
   initLangDropdown();
   initYear();
+  initFeedbackForm();
+  initTestUsersForm();
 })();
