@@ -793,6 +793,144 @@
     return "feedback.html";
   }
 
+  var PLATFORM_ICONS = { ios: "\uD83C\uDF4E", android: "\uD83E\uDD16" };
+
+  /**
+   * Full-width custom dropdown (reuses .lang-dropdown styles).
+   * cfg: { rootId, triggerId, listId, hiddenInputId, valueElId, placeholderElId, onChange }
+   */
+  function initCustomDropdown(cfg) {
+    var root = document.getElementById(cfg.rootId);
+    var trigger = document.getElementById(cfg.triggerId);
+    var list = document.getElementById(cfg.listId);
+    var hidden = cfg.hiddenInputId ? document.getElementById(cfg.hiddenInputId) : null;
+    if (!root || !trigger || !list) return null;
+
+    var options = Array.prototype.slice.call(list.querySelectorAll(".lang-dropdown-option"));
+
+    function isOpen() {
+      return !list.hidden;
+    }
+
+    function open() {
+      list.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      root.classList.add("is-open");
+    }
+
+    function close() {
+      list.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      root.classList.remove("is-open");
+    }
+
+    function setActive(opt) {
+      options.forEach(function (o) {
+        var on = o === opt;
+        o.classList.toggle("is-active", on);
+        o.setAttribute("aria-selected", on ? "true" : "false");
+      });
+    }
+
+    function selectOption(opt, silent) {
+      if (!opt) return;
+      var val = opt.getAttribute("data-value") || "";
+      setActive(opt);
+      if (hidden) hidden.value = val;
+      if (cfg.onChange) cfg.onChange(val, opt);
+      if (!silent) close();
+    }
+
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (isOpen()) close();
+      else open();
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!root.contains(e.target)) close();
+    });
+
+    root.addEventListener("focusout", function () {
+      requestAnimationFrame(function () {
+        if (!root.contains(document.activeElement)) close();
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && isOpen()) {
+        close();
+        trigger.focus();
+      }
+    });
+
+    function focusOptionIndex(ix) {
+      if (ix < 0 || ix >= options.length) return;
+      options[ix].focus();
+    }
+
+    function activeIndex() {
+      var i = options.indexOf(document.activeElement);
+      if (i >= 0) return i;
+      var ai = options.findIndex(function (o) {
+        return o.classList.contains("is-active");
+      });
+      return ai >= 0 ? ai : 0;
+    }
+
+    trigger.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (!isOpen()) open();
+        focusOptionIndex(0);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (!isOpen()) open();
+        focusOptionIndex(options.length - 1);
+      }
+    });
+
+    list.addEventListener("keydown", function (e) {
+      if (!isOpen()) return;
+      var ix = activeIndex();
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        focusOptionIndex(Math.min(options.length - 1, ix + 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        focusOptionIndex(Math.max(0, ix - 1));
+      } else if (e.key === "Enter" || e.key === " ") {
+        if (options.indexOf(document.activeElement) >= 0) {
+          e.preventDefault();
+          selectOption(document.activeElement);
+        }
+      }
+    });
+
+    options.forEach(function (opt) {
+      opt.addEventListener("click", function () {
+        selectOption(opt);
+      });
+    });
+
+    return {
+      getValue: function () {
+        return hidden ? hidden.value : "";
+      },
+      clear: function () {
+        options.forEach(function (o) {
+          o.classList.remove("is-active");
+          o.setAttribute("aria-selected", "false");
+        });
+        if (hidden) hidden.value = "";
+        if (cfg.onClear) cfg.onClear();
+      },
+      setInvalid: function (on) {
+        root.classList.toggle("is-invalid", !!on);
+      },
+    };
+  }
+
   function initTestUsersForm() {
     var form = document.getElementById("centifi-test-users-form");
     if (!form) return;
@@ -800,11 +938,40 @@
     var copy = testUsersStrings();
     var statusEl = document.getElementById("test-users-status");
     var submitBtn = document.getElementById("test-users-submit");
-    var platformSelect = document.getElementById("test-users-platform");
+    var platformHidden = document.getElementById("test-users-platform");
+    var platformValueEl = document.getElementById("test-users-platform-value");
+    var platformPlaceholderEl = document.getElementById("test-users-platform-placeholder");
     var platformLabel = document.getElementById("test-users-platform-label");
     var emailLabel = document.getElementById("test-users-email-label");
     var altText = document.getElementById("test-users-alt-text");
     var altLink = document.getElementById("test-users-alt-link");
+
+    function renderPlatformValue(value) {
+      if (!platformValueEl) return;
+      if (!value) {
+        platformValueEl.innerHTML =
+          '<span class="form-dropdown-placeholder" id="test-users-platform-placeholder">' +
+          copy.platformPlaceholder +
+          "</span>";
+        return;
+      }
+      var icon = PLATFORM_ICONS[value] || "";
+      var label = copy.platforms[value] || value;
+      platformValueEl.innerHTML =
+        '<span class="lang-flag" aria-hidden="true">' +
+        icon +
+        '</span> <span>' +
+        label +
+        "</span>";
+    }
+
+    function applyPlatformOptionLabels() {
+      document.querySelectorAll("#test-users-platform-list .lang-dropdown-option").forEach(function (btn) {
+        var key = btn.getAttribute("data-value");
+        var labelEl = btn.querySelector(".platform-option-label");
+        if (key && labelEl && copy.platforms[key]) labelEl.textContent = copy.platforms[key];
+      });
+    }
 
     if (platformLabel)
       platformLabel.innerHTML =
@@ -817,25 +984,36 @@
       altLink.setAttribute("href", feedbackHref());
     }
     if (submitBtn) submitBtn.textContent = copy.submit;
+    if (platformPlaceholderEl) platformPlaceholderEl.textContent = copy.platformPlaceholder;
+    applyPlatformOptionLabels();
+    renderPlatformValue(platformHidden ? platformHidden.value : "");
 
-    if (platformSelect) {
-      var placeholder = platformSelect.querySelector('option[value=""]');
-      if (placeholder) placeholder.textContent = copy.platformPlaceholder;
-      Array.prototype.forEach.call(platformSelect.options, function (opt) {
-        if (copy.platforms[opt.value]) opt.textContent = copy.platforms[opt.value];
-      });
-    }
+    var platformDropdown = initCustomDropdown({
+      rootId: "test-users-platform-dropdown",
+      triggerId: "test-users-platform-trigger",
+      listId: "test-users-platform-list",
+      hiddenInputId: "test-users-platform",
+      onChange: function (val) {
+        renderPlatformValue(val);
+        if (platformDropdown) platformDropdown.setInvalid(false);
+      },
+      onClear: function () {
+        renderPlatformValue("");
+      },
+    });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       setFeedbackStatus(statusEl, "", "");
 
       var email = (document.getElementById("test-users-email").value || "").trim();
-      var platform = platformSelect ? platformSelect.value : "";
+      var platform = platformHidden ? platformHidden.value : "";
       if (!email || !platform) {
+        if (platformDropdown) platformDropdown.setInvalid(!platform);
         setFeedbackStatus(statusEl, copy.errorValidation, "error");
         return;
       }
+      if (platformDropdown) platformDropdown.setInvalid(false);
 
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -862,6 +1040,8 @@
             }
             if (res.ok) {
               form.reset();
+              if (platformDropdown) platformDropdown.clear();
+              renderPlatformValue("");
               setFeedbackStatus(statusEl, copy.success, "success");
               return;
             }

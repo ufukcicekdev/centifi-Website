@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+CHEVRON_SVG = """<svg class="lang-dropdown-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 4.5 6 7.5 9 4.5"/></svg>"""
+
 LOCALES = {
     "en": {
         "html_lang": "en",
@@ -171,12 +173,38 @@ def render(lang: str, cfg: dict) -> str:
 
       <form id="centifi-test-users-form" class="feedback-form" novalidate>
         <div class="feedback-field">
-          <label for="test-users-platform" id="test-users-platform-label">Platform <span class="feedback-required">*</span></label>
-          <select id="test-users-platform" name="platform" required>
-            <option value="">Select…</option>
-            <option value="ios">iOS</option>
-            <option value="android">Android</option>
-          </select>
+          <label for="test-users-platform-trigger" id="test-users-platform-label">Platform <span class="feedback-required">*</span></label>
+          <div class="form-dropdown lang-dropdown" id="test-users-platform-dropdown">
+            <button
+              type="button"
+              class="lang-dropdown-trigger"
+              id="test-users-platform-trigger"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-controls="test-users-platform-list"
+              aria-labelledby="test-users-platform-label"
+            >
+              <span class="lang-dropdown-value" id="test-users-platform-value">
+                <span class="form-dropdown-placeholder" id="test-users-platform-placeholder">Select…</span>
+              </span>
+              {CHEVRON_SVG}
+            </button>
+            <ul class="lang-dropdown-list" id="test-users-platform-list" role="listbox" hidden>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="ios" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">🍎</span>
+                  <span class="platform-option-label">iOS</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="android" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">🤖</span>
+                  <span class="platform-option-label">Android</span>
+                </button>
+              </li>
+            </ul>
+            <input type="hidden" id="test-users-platform" name="platform" value="" />
+          </div>
         </div>
         <div class="feedback-field">
           <label for="test-users-email" id="test-users-email-label">Email <span class="feedback-required">*</span></label>
