@@ -7,6 +7,40 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+CHEVRON_SVG = """<svg class="lang-dropdown-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 4.5 6 7.5 9 4.5"/></svg>"""
+
+CATEGORY_OPTIONS = """
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option is-active" data-value="general" aria-selected="true">
+                  <span class="lang-flag" aria-hidden="true">💬</span>
+                  <span class="dropdown-option-label">General</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="bug" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">🐛</span>
+                  <span class="dropdown-option-label">Bug report</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="feature" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">✨</span>
+                  <span class="dropdown-option-label">Feature request</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="billing" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">💳</span>
+                  <span class="dropdown-option-label">Billing / subscription</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button type="button" role="option" class="lang-dropdown-option" data-value="other" aria-selected="false">
+                  <span class="lang-flag" aria-hidden="true">📎</span>
+                  <span class="dropdown-option-label">Other</span>
+                </button>
+              </li>"""
+
 LOCALES = {
     "en": {
         "html_lang": "en",
@@ -184,14 +218,28 @@ def render(lang: str, cfg: dict) -> str:
           <input id="feedback-email" name="email" type="email" autocomplete="email" required maxlength="254" />
         </div>
         <div class="feedback-field">
-          <label for="feedback-category" id="feedback-category-label">Topic</label>
-          <select id="feedback-category" name="category">
-            <option value="general">General</option>
-            <option value="bug">Bug report</option>
-            <option value="feature">Feature request</option>
-            <option value="billing">Billing / subscription</option>
-            <option value="other">Other</option>
-          </select>
+          <label for="feedback-category-trigger" id="feedback-category-label">Topic</label>
+          <div class="form-dropdown lang-dropdown" id="feedback-category-dropdown">
+            <button
+              type="button"
+              class="lang-dropdown-trigger"
+              id="feedback-category-trigger"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-controls="feedback-category-list"
+              aria-labelledby="feedback-category-label"
+            >
+              <span class="lang-dropdown-value" id="feedback-category-value">
+                <span class="lang-flag" aria-hidden="true">💬</span>
+                <span>General</span>
+              </span>
+              {CHEVRON_SVG}
+            </button>
+            <ul class="lang-dropdown-list" id="feedback-category-list" role="listbox" hidden>
+{CATEGORY_OPTIONS}
+            </ul>
+            <input type="hidden" id="feedback-category" name="category" value="general" />
+          </div>
         </div>
         <div class="feedback-field">
           <label for="feedback-message" id="feedback-message-label">Message <span class="feedback-required">*</span></label>

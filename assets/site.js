@@ -625,7 +625,27 @@
     var messageLabel = document.getElementById("feedback-message-label");
     var hintEl = document.getElementById("feedback-message-hint");
     var altText = document.getElementById("feedback-alt-text");
-    var categorySelect = document.getElementById("feedback-category");
+    var categoryHidden = document.getElementById("feedback-category");
+    var categoryValueEl = document.getElementById("feedback-category-value");
+
+    function renderCategoryValue(value) {
+      if (!categoryValueEl) return;
+      var key = value || "general";
+      var icon = FEEDBACK_CATEGORY_ICONS[key] || "";
+      var label = (copy.categories && copy.categories[key]) || key;
+      categoryValueEl.innerHTML =
+        '<span class="lang-flag" aria-hidden="true">' + icon + "</span> <span>" + label + "</span>";
+    }
+
+    function applyCategoryOptionLabels() {
+      document.querySelectorAll("#feedback-category-list .lang-dropdown-option").forEach(function (btn) {
+        var key = btn.getAttribute("data-value");
+        var labelEl = btn.querySelector(".dropdown-option-label");
+        if (key && labelEl && copy.categories && copy.categories[key]) {
+          labelEl.textContent = copy.categories[key];
+        }
+      });
+    }
 
     if (nameLabel) nameLabel.textContent = copy.name;
     if (emailLabel)
@@ -636,12 +656,18 @@
     if (hintEl) hintEl.textContent = copy.hint;
     if (altText) altText.textContent = copy.alt;
     if (submitBtn) submitBtn.textContent = copy.submit;
+    applyCategoryOptionLabels();
+    renderCategoryValue(categoryHidden ? categoryHidden.value || "general" : "general");
 
-    if (categorySelect && copy.categories) {
-      Array.prototype.forEach.call(categorySelect.options, function (opt) {
-        if (copy.categories[opt.value]) opt.textContent = copy.categories[opt.value];
-      });
-    }
+    var categoryDropdown = initCustomDropdown({
+      rootId: "feedback-category-dropdown",
+      triggerId: "feedback-category-trigger",
+      listId: "feedback-category-list",
+      hiddenInputId: "feedback-category",
+      onChange: function (val) {
+        renderCategoryValue(val);
+      },
+    });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -662,7 +688,7 @@
       var payload = {
         name: (document.getElementById("feedback-name").value || "").trim(),
         email: email,
-        category: categorySelect ? categorySelect.value : "general",
+        category: categoryHidden ? categoryHidden.value || "general" : "general",
         message: message,
         language: getLang(),
         website: (document.getElementById("feedback-website").value || "").trim(),
@@ -679,6 +705,8 @@
           }).then(function (data) {
             if (res.ok) {
               form.reset();
+              if (categoryDropdown) categoryDropdown.setValue("general", true);
+              renderCategoryValue("general");
               setFeedbackStatus(statusEl, copy.success, "success");
               return;
             }
@@ -794,6 +822,13 @@
   }
 
   var PLATFORM_ICONS = { ios: "\uD83C\uDF4E", android: "\uD83E\uDD16" };
+  var FEEDBACK_CATEGORY_ICONS = {
+    general: "\uD83D\uDCAC",
+    bug: "\uD83D\uDC1B",
+    feature: "\u2728",
+    billing: "\uD83D\uDCB3",
+    other: "\uD83D\uDCCE",
+  };
 
   /**
    * Full-width custom dropdown (reuses .lang-dropdown styles).
@@ -927,6 +962,16 @@
       },
       setInvalid: function (on) {
         root.classList.toggle("is-invalid", !!on);
+      },
+      setValue: function (val, silent) {
+        var opt = null;
+        for (var i = 0; i < options.length; i++) {
+          if (options[i].getAttribute("data-value") === val) {
+            opt = options[i];
+            break;
+          }
+        }
+        if (opt) selectOption(opt, silent !== false);
       },
     };
   }
