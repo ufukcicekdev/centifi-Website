@@ -1,0 +1,37 @@
+# Centifi
+
+> AI-powered expense tracker for iOS and Android. Log expenses by voice, photo, or text. Organize with budgets, categories, and lists.
+
+## What is Centifi?
+
+Centifi is a mobile expense tracking app that makes logging money effortless. Users can capture expenses by speaking naturally ("lunch 12 bucks yesterday"), photographing a receipt, or typing plain text. The app uses AI to parse amounts, dates, and categories automatically.
+
+## Key Features
+
+- **Voice & natural language input**: Log expenses by speaking or typing naturally
+- **Receipt scanning**: Capture spending from paper receipts or screenshots
+- **Category budgets**: Set monthly spending caps per category with on-device alerts
+- **Multi-currency support**: Track expenses in any currency
+- **Lists**: Organize expenses into separate lists (trips, home, work)
+- **On-device notifications**: Budget alerts run locally — no cloud push required
+- **Bank hints**: Optional automation from notification text, privacy-first
+
+## Availability
+
+- iOS: https://apps.apple.com/us/app/expense-tracker-centifi/id6769425716
+- Android: https://play.google.com/store/apps/details?id=centifi.app
+- Free to download
+
+## Supported Languages
+
+English, Turkish (Türkçe), German (Deutsch), French (Français), Spanish (Español)
+
+## Website Pages
+
+- Home: https://centifi.app/
+- Privacy Policy: https://centifi.app/privacy.html
+- Terms of Use: https://centifi.app/terms.html
+
+## Company
+
+Centifi is an independent app focused on privacy-first, on-device expense tracking. The marketing website and the app are separate — the website is informational only.
