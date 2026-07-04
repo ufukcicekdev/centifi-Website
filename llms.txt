@@ -16,10 +16,10 @@ Centifi is a mobile expense tracking app that makes logging money effortless. Us
 - **On-device notifications**: Budget alerts run locally — no cloud push required
 - **Bank hints**: Optional automation from notification text, privacy-first
 
-## Availability
+## Download
 
-- iOS: https://apps.apple.com/us/app/expense-tracker-centifi/id6769425716
-- Android: https://play.google.com/store/apps/details?id=centifi.app
+- [Download on the App Store](https://apps.apple.com/us/app/expense-tracker-centifi/id6769425716)
+- [Get it on Google Play](https://play.google.com/store/apps/details?id=centifi.app)
 - Free to download
 
 ## Supported Languages
@@ -28,9 +28,9 @@ English, Turkish (Türkçe), German (Deutsch), French (Français), Spanish (Espa
 
 ## Website Pages
 
-- Home: https://centifi.app/
-- Privacy Policy: https://centifi.app/privacy.html
-- Terms of Use: https://centifi.app/terms.html
+- [Home](https://centifi.app/)
+- [Privacy Policy](https://centifi.app/privacy.html)
+- [Terms of Use](https://centifi.app/terms.html)
 
 ## Company
 
